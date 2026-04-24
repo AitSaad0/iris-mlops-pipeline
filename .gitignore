@@ -2,3 +2,4 @@ __pycache__
 *.pyc
 train.py
 .git
+my_resources

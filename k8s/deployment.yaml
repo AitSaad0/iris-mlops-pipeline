@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iris-mlops
+  namespace: models
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iris-mlops
+  template:
+    metadata:
+      labels:
+        app: iris-mlops
+    spec:
+      containers:
+        - name: iris-mlops
+          image: mlopsapp:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: iris-mlops-svc
+  namespace: models
+spec:
+  selector:
+    app: iris-mlops
+  ports:
+    - port: 8000
+      targetPort: 8000
+  type: ClusterIP

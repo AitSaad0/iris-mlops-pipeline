@@ -3,3 +3,7 @@ __pycache__
 train.py
 .git
 my_resources
+venv/
+.gitignore
+node_modules/
+*.log
